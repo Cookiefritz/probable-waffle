@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FEU Roosevelt — Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header id="siteHeader">
+    <div class="container nav-inner">
+      <div class="brand-wrap">
+        <a href="index.html" class="logo-link"><img src="logo.png" alt="FEU Roosevelt logo"></a>
+        <a href="index.html" class="brand-title">FEUR Experience</a>
+      </div>
+
+      <nav>
+        <div class="nav-links" id="navLinks">
+          <a href="index.html" class="active">Home</a>
+          <a href="events.html">Events</a>
+          <a href="subjects.html">Subjects</a>
+          <a href="collaboration.html">Collaboration</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span class="bar"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- FULL-SCREEN TRANSPARENT MENU -->
+  <div class="nav-overlay" id="navOverlay">
+    <a href="index.html" class="active">Home</a>
+    <a href="events.html">Events</a>
+    <a href="subjects.html">Subjects</a>
+    <a href="collaboration.html">Collaboration</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- ===== HERO CAROUSEL ===== -->
+  <section class="carousel" aria-label="Main Carousel">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide">
+        <img class="slide-media" src="stryve/WEBSITE HOMEPAGEe.jpg" alt="STRYVE cover">
+        <div class="carousel-caption">
+          <h1>STRYVE — Breaking Ways, Fixing Fates</h1>
+          <p>Feature Stories And Collaborative Projects From FEU Roosevelt.</p>
+          <div style="margin-top:12px"><a class="goto" href="collaboration.html">Read</a></div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <img class="slide-media" src="events/the best.png" alt="Sinag events">
+        <div class="carousel-caption">
+          <h1>Campus Events & Highlights</h1>
+          <p>Celebrating Culture, Arts, And Student Achievements.</p>
+          <div style="margin-top:12px"><a class="goto" href="events.html">See Events</a></div>
+        </div>
+      </div>
+
+      <div class="carousel-slide">
+        <img class="slide-media" src="subjects/pc1.jpg" alt="Student works">
+        <div class="carousel-caption">
+          <h1>Student Works & Creative Subjects</h1>
+          <p>Explore Projects And Academic Journeys.</p>
+          <div style="margin-top:12px"><a class="goto" href="subjects.html">Explore Subjects</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-controls" id="carouselDots"></div>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <section class="section fade-in">
+      <div class="container">
+        <h2>Latest Features</h2>
+        <div class="grid" style="margin-top:20px">
+          <div class="card">
+            <img src="events/rrr.jpg" alt="Sinag Tam">
+            <div class="card-content">
+              <h3>Sinag Tam</h3>
+              <p>Celebrating Culture, Music, And Pride</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="events/sinag sports.png" alt="Sinag Sports">
+            <div class="card-content">
+              <h3>Sinag Sports</h3>
+              <p>Tamaraws Competing With Passion And Unity</p>
+            </div>
+          </div>
+          <div class="card">
+            <img src="stryve/MAGAZINE COVERr.png" alt="STRYVE">
+            <div class="card-content">
+              <h3>STRYVE</h3>
+              <p>Breaking Ways, Fixing Fates</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-in">
+      <div class="container" style="text-align:center">
+        <h2>About STRYVE</h2>
+        <p style="color:var(--muted);max-width:800px;margin:12px auto">
+          STRYVE Is Our Editorial Platform — Highlighting The Vision, Talent, And Passion Of FEU Roosevelt Students.
+        </p>
+      </div>
+    </section>
+
+    <div style="text-align:center;margin:40px 0">
+      <a class="goto" href="collaboration.html">Read STRYVE</a>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container" style="text-align:center;padding:28px;color:var(--muted)">
+      © <span id="year"></span> BSIT 1-2 FEU Roosevelt — All Rights Reserved
+    </div>
+  </footer>
+
+  <!-- ===== JS: Navbar, Carousel, Animations, Transition ===== -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Navbar behavior
+    const header = document.getElementById('siteHeader');
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+      const cur = window.pageYOffset;
+      if (cur > lastScroll && cur > 90) header.style.transform = 'translateY(-84px)';
+      else header.style.transform = 'translateY(0)';
+      lastScroll = cur <= 0 ? 0 : cur;
+      if (cur > 40) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    });
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navOverlay.classList.toggle('show');
+      document.body.style.overflow = navOverlay.classList.contains('show') ? 'hidden' : '';
+    });
+
+    navOverlay.addEventListener('click', e => {
+      if (e.target === navOverlay) {
+        hamburger.classList.remove('active');
+        navOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Fade-in sections
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Carousel logic
+    const track = document.getElementById('carouselTrack');
+    const slides = Array.from(track.children);
+    const dotsContainer = document.getElementById('carouselDots');
+    let index = 0;
+    slides.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => { goTo(i); reset(); });
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.children;
+
+    function goTo(i){
+      index = i;
+      track.style.transform = `translateX(-${100 * i}%)`;
+      [...dots].forEach((d, di) => d.classList.toggle('active', di === i));
+    }
+    function next(){ goTo((index + 1) % slides.length); }
+    let auto = setInterval(next, 5500);
+    function reset(){ clearInterval(auto); auto = setInterval(next, 5500); }
+
+  </script>
+
+  <!-- Page transition (fade between pages) -->
+  <script>
+    (function(){
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.add('page-fade-enter', 'page-fade-active');
+        setTimeout(() => document.body.classList.remove('page-fade-enter', 'page-fade-active'), 520);
+      });
+      document.addEventListener('click', e => {
+        const a = e.target.closest('a');
+        if (!a) return;
+        const href = a.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || a.target === '_blank') return;
+        e.preventDefault();
+        document.body.classList.add('page-fade-exit', 'page-fade-active');
+        setTimeout(() => { window.location.href = href; }, 420);
+      });
+    })();
+  </script>
+
+</body>
+</html>
